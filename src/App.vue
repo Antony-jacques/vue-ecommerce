@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <h2>hello</h2>
+  <h2 class="b1" >hello</h2>
 </template>
 
 <style lang="scss">
