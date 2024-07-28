@@ -1,12 +1,13 @@
 :root {
-  --primary: -1 #3498db;
-  --primary: -1 #2980b9;
+  --primary-1: #3498db;
+  --primary-2: #2980b9;
   --danger-1: #e74c3c;
   --danger-2: #c0392b;
   --success-1: #2ecc71;
   --success-2: #27ae60;
   --gray-1: #f6f6f6;
   --gray-2: #ddd;
+  --gray-3: #2c3e50;
   --text-color: #444;
   --text-primary-color: #ffffff;
 
@@ -92,10 +93,27 @@ body {
   padding: 2.25rem;
 }
 
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 // margin
 
 .m-10 {
   margin: 0.75rem;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mr-20 {
+  margin-right: 20px;
 }
 
 .m-20 {
