@@ -7,10 +7,10 @@ import Cart from './components/Cart/Cart.vue';
 
 <template>
   <div class="app-container">
-    <TheHeader class="header b1" />
-    <Shop class="shop b2" />
-    <Cart class="cart b3" />
-    <TheFooter class="footer b4" />
+    <TheHeader class="header" />
+    <Shop class="shop" />
+    <Cart class="cart" />
+    <TheFooter class="footer" />
   </div>
 </template>
 
@@ -33,6 +33,8 @@ import Cart from './components/Cart/Cart.vue';
 }
 .cart {
   grid-area: cart;
+  border-left: var(--border);
+  background-color: white;
 }
 .footer {
   grid-area: footer;

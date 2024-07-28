@@ -63,7 +63,7 @@ body {
   flex-direction: row;
 }
 
-.flew-column {
+.flex-column {
   flex-direction: column;
 }
 
@@ -75,7 +75,7 @@ body {
   align-items: center;
 }
 
-.flex.fill {
+.flex-fill {
   flex: 1 1 auto;
 }
 
@@ -126,4 +126,31 @@ body {
 
 .mb-10 {
   margin-bottom: 10px;
+}
+
+// buttons
+
+.btn {
+  padding: 8px 15px;
+  border: 0;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  color: var(--text-primary-color);
+  &:hover {
+    background-color: var(--primary-2);
+  }
+}
+
+.btn-danger {
+  background-color: var(--danger-1);
+  color: var(--text-primary-color);
+  &:hover {
+    background-color: var(--danger-2);
+  }
 }
