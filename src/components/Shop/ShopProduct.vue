@@ -6,18 +6,32 @@
       <p>{{ product.description }}</p>
       <div class="d-flex flex-row align-items-center">
         <strong class="flex-fill">Prix : {{ product.price }}€</strong>
-        <button class="btn btn-primary">Ajouter au panier</button>
+        <button @click="emit('addProductToCart', product.id)" class="btn btn-primary">Ajouter au panier</button>
+        <input v-model="isAddedTowishList" type="checkbox">
+        <p>{{ isAddedTowishList }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import type { ProductInterface } from '../../interfaces/productInterface'
 
-defineProps<{
+const props = defineProps<{
   product: ProductInterface
 }>()
+
+const emit = defineEmits<{
+  (e: 'addProductToCart', productId: number): void,
+  (e: 'addToWishList', wishProduct: { isAddedTowishList: boolean, productId: number }): void
+}>()
+
+const isAddedTowishList = ref(false)
+
+watch(isAddedTowishList, (newValue) => {
+  emit('addToWishList', { isAddedTowishList: newValue, productId: props.product.id })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +42,6 @@ defineProps<{
   &-image {
     border-top-right-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
-    // background-image: url('@/assets/images/macbook_pro.png');
     background-size: cover;
     background-position: center;
     height: 250px;
