@@ -29,7 +29,7 @@ function addProductToCart(productId: number): void {
     <TheHeader class="header" />
     <Shop @add-product-to-cart="addProductToCart" :products="state.products" 
     @add-to-wish-list="addToWishList" class="shop" />
-    <Cart class="cart" />
+    <Cart :cart="state.cart" class="cart" />
     <TheFooter class="footer" />
   </div>
 </template>
