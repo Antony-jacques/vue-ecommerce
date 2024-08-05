@@ -6,12 +6,17 @@ defineProps<{
   cart: ProductInterface[]
 }>()
 
+const emit = defineEmits<{
+  (e:'removeProductFromCart', $event)
+}>()
+
+
 </script>
 
 <template>
   <div class="p-20">
     <h2 class="mb-10">Panier</h2>
-    <CartProductList :cart="cart"/>
+    <CartProductList @remove-product-from-cart="emit('removeProductFromCart', $event)" :cart="cart"/>
   </div>
 </template>
 

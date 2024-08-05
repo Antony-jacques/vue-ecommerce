@@ -22,6 +22,11 @@ function addProductToCart(productId: number): void {
   }
 }
 
+function removeProductFromCart(productId: number):void {
+  console.log('removeProductFromCart', productId)
+  state.cart = state.cart.filter(product => product.id != productId)
+}
+
 </script>
 
 <template>
@@ -29,7 +34,7 @@ function addProductToCart(productId: number): void {
     <TheHeader class="header" />
     <Shop @add-product-to-cart="addProductToCart" :products="state.products" 
     @add-to-wish-list="addToWishList" class="shop" />
-    <Cart :cart="state.cart" class="cart" />
+    <Cart @remove-product-from-cart="removeProductFromCart" :cart="state.cart" class="cart" />
     <TheFooter class="footer" />
   </div>
 </template>

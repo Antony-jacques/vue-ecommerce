@@ -5,11 +5,15 @@ import CartProduct from './CartProduct.vue'
 const props = defineProps<{
   cart: ProductInterface[]
 }>()
+
+const emit = defineEmits<{
+  (e:'removeProductFromCart', $event)
+}>()
 </script>
 
 <template>
   <div class="d-flex flex-column">
-    <CartProduct v-for="product in cart" :key="product.title" :product="product" />
+    <CartProduct @remove-product-from-cart="emit('removeProductFromCart', $event)" v-for="product in cart" :key="product.title" :product="product" />
   </div>
 </template>
 
