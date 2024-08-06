@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import type { ProductInterface } from '../../interfaces/productInterface'
+import type { ProductInterface } from '../../interfaces'
 import ShopProductList from './ShopProductList.vue'
 
 const props = defineProps<{

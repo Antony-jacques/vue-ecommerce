@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import type { ProductInterface } from '../../interfaces/productInterface'
+import type { ProductInterface } from '../../interfaces'
 
 const props = defineProps<{
   product: ProductInterface
