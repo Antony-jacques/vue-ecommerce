@@ -4,7 +4,7 @@ import TheFooter from './components/Footer.vue'
 import Shop from './components/Shop/Shop.vue'
 import Cart from './components/Cart/Cart.vue'
 import data from './data/product'
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import type { ProductCartInterface, ProductInterface } from './interfaces'
 
 const state = reactive<{
@@ -33,18 +33,25 @@ function removeProductFromCart(productId: number): void {
   const productFromCart = state.cart.find((product) => product.id === productId)
   if (productFromCart) {
     if (productFromCart.quantity === 1) {
-      state.cart = state.cart.filter(product => product.id != productId)
+      state.cart = state.cart.filter((product) => product.id != productId)
     } else {
       productFromCart.quantity--
     }
   }
-
-  // state.cart = state.cart.filter(product => product.id != productId)
 }
+
+const cartEmpty = computed(() => state.cart.length === 0)
+
 </script>
 
 <template>
-  <div class="app-container">
+  <div
+    class="app-container"
+    :class="{
+      gridEmpty: cartEmpty
+    }"
+  >
+    <h2>{{ cartEmpty }}</h2>
     <TheHeader class="header" />
     <Shop
       @add-product-to-cart="addProductToCart"
@@ -52,14 +59,19 @@ function removeProductFromCart(productId: number): void {
       @add-to-wish-list="addToWishList"
       class="shop"
     />
-    <Cart @remove-product-from-cart="removeProductFromCart" :cart="state.cart" class="cart" />
+    <Cart
+      v-if="!cartEmpty"
+      @remove-product-from-cart="removeProductFromCart"
+      :cart="state.cart"
+      class="cart"
+    />
     <TheFooter class="footer" />
   </div>
 </template>
 
 <style lang="scss">
-@use './assets/base.scss' as *;
-@use './assets/debug.scss' as *;
+@use './assets/scss/base.scss' as *;
+@use './assets/scss/debug.scss' as *;
 
 .app-container {
   min-height: 100vh;
@@ -68,17 +80,26 @@ function removeProductFromCart(productId: number): void {
   grid-template-columns: 75% 25%;
   grid-template-rows: 48px auto 48px;
 }
+
 .header {
   grid-area: header;
 }
+
 .shop {
   grid-area: shop;
 }
+
+.gridEmpty {
+  grid-template-areas: 'header' 'shop' 'footer';
+  grid-template-columns: 100%;
+}
+
 .cart {
   grid-area: cart;
   border-left: var(--border);
   background-color: white;
 }
+
 .footer {
   grid-area: footer;
 }
