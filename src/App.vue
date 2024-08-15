@@ -5,17 +5,22 @@ import Shop from './components/Shop/Shop.vue'
 import Cart from './components/Cart/Cart.vue'
 import data from './data/product'
 import { computed, reactive } from 'vue'
-import type { FiltersInterface, ProductCartInterface, ProductInterface } from './interfaces'
+import type {
+  FiltersInterface,
+  FilterUpdate,
+  ProductCartInterface,
+  ProductInterface
+} from './interfaces'
 import { DEFAULT_FILTERS } from './data/filters'
 
 const state = reactive<{
   products: ProductInterface[]
-  cart: ProductCartInterface[],
+  cart: ProductCartInterface[]
   filters: FiltersInterface
 }>({
   products: data,
   cart: [],
-  filters: DEFAULT_FILTERS
+  filters: { ...DEFAULT_FILTERS }
 })
 
 function addProductToCart(productId: number): void {
@@ -43,8 +48,34 @@ function removeProductFromCart(productId: number): void {
   }
 }
 
+function updateFilter(filterUpdate: FilterUpdate) {
+  if (filterUpdate.search !== undefined) {
+    state.filters.search = filterUpdate.search
+  } else if (filterUpdate.priceRange) {
+    state.filters.priceRange = filterUpdate.priceRange
+  } else if (filterUpdate.category) {
+    state.filters.category = filterUpdate.category
+  } else {
+    state.filters = { ...DEFAULT_FILTERS }
+  }
+}
+
 const cartEmpty = computed(() => state.cart.length === 0)
 
+const filteredProducts = computed(() => {
+  return state.products.filter((product) => {
+    if (
+      product.title.toLowerCase().startsWith(state.filters.search.toLowerCase()) &&
+      product.price >= state.filters.priceRange[0] &&
+      product.price <= state.filters.priceRange[1] &&
+      (product.category === state.filters.category || state.filters.category === 'all')
+    ) {
+      return true
+    } else {
+      return false
+    }
+  })
+})
 </script>
 
 <template>
@@ -60,6 +91,7 @@ const cartEmpty = computed(() => state.cart.length === 0)
       @add-product-to-cart="addProductToCart"
       :products="state.products"
       @add-to-wish-list="addToWishList"
+      @update-filter="updateFilter"
       class="shop"
     />
     <Cart
