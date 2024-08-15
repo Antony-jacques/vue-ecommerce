@@ -1,3 +1,30 @@
+<template>
+  <div
+    class="app-container"
+    :class="{
+      gridEmpty: cartEmpty
+    }"
+  >
+    <h2>{{ cartEmpty }}</h2>
+    <TheHeader class="header" />
+    <Shop
+      @add-product-to-cart="addProductToCart"
+      @add-to-wish-list="addToWishList"
+      @update-filter="updateFilter"
+      :products="state.products"
+      :filters="state.filters"
+      class="shop"
+    />
+    <Cart
+      v-if="!cartEmpty"
+      @remove-product-from-cart="removeProductFromCart"
+      :cart="state.cart"
+      class="cart"
+    />
+    <TheFooter class="footer" />
+  </div>
+</template>
+
 <script setup lang="ts">
 import TheHeader from './components/Header.vue'
 import TheFooter from './components/Footer.vue'
@@ -78,31 +105,6 @@ const filteredProducts = computed(() => {
 })
 </script>
 
-<template>
-  <div
-    class="app-container"
-    :class="{
-      gridEmpty: cartEmpty
-    }"
-  >
-    <h2>{{ cartEmpty }}</h2>
-    <TheHeader class="header" />
-    <Shop
-      @add-product-to-cart="addProductToCart"
-      :products="state.products"
-      @add-to-wish-list="addToWishList"
-      @update-filter="updateFilter"
-      class="shop"
-    />
-    <Cart
-      v-if="!cartEmpty"
-      @remove-product-from-cart="removeProductFromCart"
-      :cart="state.cart"
-      class="cart"
-    />
-    <TheFooter class="footer" />
-  </div>
-</template>
 
 <style lang="scss">
 @use './assets/scss/base.scss' as *;
