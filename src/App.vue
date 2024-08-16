@@ -2,7 +2,7 @@
   <div
     class="app-container"
     :class="{
-      gridEmpty: cartEmpty
+      gridEmpty: cartEmpty,
     }"
   >
     <h2>{{ cartEmpty }}</h2>
@@ -11,7 +11,7 @@
       @add-product-to-cart="addProductToCart"
       @add-to-wish-list="addToWishList"
       @update-filter="updateFilter"
-      :products="state.products"
+      :products="filteredProducts"
       :filters="state.filters"
       class="shop"
     />
@@ -107,8 +107,8 @@ const filteredProducts = computed(() => {
 
 
 <style lang="scss">
-@use './assets/scss/base.scss' as *;
-@use './assets/scss/debug.scss' as *;
+@import './assets/scss/base.scss';
+@import './assets/scss/debug.scss';
 
 .app-container {
   min-height: 100vh;
@@ -118,17 +118,17 @@ const filteredProducts = computed(() => {
   grid-template-rows: 48px auto 48px;
 }
 
+.gridEmpty {
+  grid-template-areas: 'header' 'shop' 'footer';
+  grid-template-columns: 100%;
+}
+
 .header {
   grid-area: header;
 }
 
 .shop {
   grid-area: shop;
-}
-
-.gridEmpty {
-  grid-template-areas: 'header' 'shop' 'footer';
-  grid-template-columns: 100%;
 }
 
 .cart {

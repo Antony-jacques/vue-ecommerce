@@ -7,7 +7,7 @@
   --success-2: #27ae60;
   --gray-1: #f6f6f6;
   --gray-2: #ddd;
-  --gray-3: #2c3e50;
+  --gray-3: #34495e;
   --text-color: #444;
   --text-primary-color: #ffffff;
 
@@ -18,7 +18,6 @@
 }
 
 // reset
-
 * {
   box-sizing: border-box;
 }
@@ -71,7 +70,7 @@ body {
   justify-content: center;
 }
 
-.align-items {
+.align-items-center {
   align-items: center;
 }
 
@@ -82,15 +81,11 @@ body {
 // padding
 
 .p-10 {
-  padding: 0.75rem;
+  padding: 10px;
 }
 
 .p-20 {
-  padding: 1.5rem;
-}
-
-.p-30 {
-  padding: 2.25rem;
+  padding: 20px;
 }
 
 .px-20 {
@@ -98,10 +93,18 @@ body {
   padding-right: 20px;
 }
 
+.p-30 {
+  padding: 30px;
+}
+
 // margin
 
 .m-10 {
-  margin: 0.75rem;
+  margin: 10px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
 }
 
 .mb-10 {
@@ -117,15 +120,11 @@ body {
 }
 
 .m-20 {
-  margin: 1.5rem;
+  margin: 20px;
 }
 
 .m-30 {
-  margin: 2.25rem;
-}
-
-.mb-10 {
-  margin-bottom: 10px;
+  margin: 30px;
 }
 
 // buttons
@@ -154,6 +153,7 @@ body {
     background-color: var(--danger-2);
   }
 }
+
 .btn-success {
   background-color: var(--success-1);
   color: var(--text-primary-color);
