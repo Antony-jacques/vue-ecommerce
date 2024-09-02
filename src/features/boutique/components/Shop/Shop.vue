@@ -19,7 +19,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="d-flex flex-row">
+  <div class="d-flex flex-row">555
     <ShopFilters
       :filters="filters"
       :nbr-of-products="products.length"
